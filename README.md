@@ -1,9 +1,50 @@
 # redux-connection-status
 
-Access network connection status from your store.
+A redux module for storing online/offline state in your store.
 
-[![Travis build status](http://img.shields.io/travis/gyorgygutai/redux-connection-status.svg?style=flat)](https://travis-ci.org/gyorgygutai/redux-connection-status)
-[![Code Climate](https://codeclimate.com/github/gyorgygutai/redux-connection-status/badges/gpa.svg)](https://codeclimate.com/github/gyorgygutai/redux-connection-status)
-[![Test Coverage](https://codeclimate.com/github/gyorgygutai/redux-connection-status/badges/coverage.svg)](https://codeclimate.com/github/gyorgygutai/redux-connection-status)
-[![Dependency Status](https://david-dm.org/gyorgygutai/redux-connection-status.svg)](https://david-dm.org/gyorgygutai/redux-connection-status)
-[![devDependency Status](https://david-dm.org/gyorgygutai/redux-connection-status/dev-status.svg)](https://david-dm.org/gyorgygutai/redux-connection-status#info=devDependencies)
+NOTE: only works in the browser, no React Native implementation provided
+
+## Installation
+
+It can be installed as an [npm package](https://www.npmjs.org/package/redux-connection-status):
+
+```bash
+$ npm install --save redux-connection-status
+```
+
+## Basic usage
+
+The minimal example:
+
+```js
+import { createStore, combineReducers } from 'redux'
+
+import connectionReducer, { syncConnectionWithStore } from 'redux-connection-status'
+
+// add the reducer to your store
+const store = createStore(
+	combineReducers({
+	  // ...
+	  connection: connectionReducer()
+	  // etc ...
+	})
+)
+
+// keep connection status and state.connection in sync
+// from now on you can use store.getState().connection.isOnline in your app
+syncConnectionWithStore(store)
+```
+
+#### syncConnectionWithStore(store(, syncerFunction: `function`))
+
+This function has a second optional parameter. The default implementation uses the `navigator.onLine` property and `online`-`offline` events to detect the connection state. You can override this behavior by providing another function. Your function will have access to the store as the first parameter and will be called once on init.
+
+If you detect a change, just call the corresponding action:
+
+```js
+import { connectionStatusChanged } from 'redux-connection-status'
+
+const isOnline = false
+
+store.dispatch(connectionStatusChanged(isOnline))
+```

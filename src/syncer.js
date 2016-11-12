@@ -1,12 +1,12 @@
 import { connectionStatusChanged } from './reducer'
 
-function connectionDetector (store) {
+function connectionSyncer (store) {
   store.dispatch(connectionStatusChanged(navigator.onLine))
 
   window.addEventListener('online', () => store.dispatch(connectionStatusChanged(true)))
   window.addEventListener('offline', () => store.dispatch(connectionStatusChanged(false)))
 }
 
-const syncConnectionWithStore = (store, detectorFn = connectionDetector) => detectorFn(store)
+const syncConnectionWithStore = (store, syncerFunction = connectionSyncer) => syncerFunction(store)
 
 export default syncConnectionWithStore
