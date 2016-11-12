@@ -1,6 +1,6 @@
 {
   "name": "redux-connection-status",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Access network connection status from your store.",
   "main": "dist/index.js",
   "scripts": {

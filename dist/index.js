@@ -58,15 +58,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (true) {
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if (typeof exports !== "undefined") {
-	    factory(exports, require('./reducer'), require('./sync'));
+	    factory(exports, require('./reducer'), require('./syncer'));
 	  } else {
 	    var mod = {
 	      exports: {}
 	    };
-	    factory(mod.exports, global.reducer, global.sync);
+	    factory(mod.exports, global.reducer, global.syncer);
 	    global.index = mod.exports;
 	  }
-	})(this, function (exports, _reducer, _sync) {
+	})(this, function (exports, _reducer, _syncer) {
 	  'use strict';
 	
 	  Object.defineProperty(exports, "__esModule", {
@@ -76,7 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var _reducer2 = _interopRequireDefault(_reducer);
 	
-	  var _sync2 = _interopRequireDefault(_sync);
+	  var _syncer2 = _interopRequireDefault(_syncer);
 	
 	  function _interopRequireDefault(obj) {
 	    return obj && obj.__esModule ? obj : {
@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  }
 	
-	  exports.syncConnectionWithStore = _sync2.default;
+	  exports.syncConnectionWithStore = _syncer2.default;
 	  exports.connectionStatusChanged = _reducer.connectionStatusChanged;
 	  exports.STATUS_CHANGED = _reducer.STATUS_CHANGED;
 	  exports.default = _reducer2.default;
@@ -165,7 +165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      exports: {}
 	    };
 	    factory(mod, mod.exports, global.reducer);
-	    global.sync = mod.exports;
+	    global.syncer = mod.exports;
 	  }
 	})(this, function (module, exports, _reducer) {
 	  'use strict';
@@ -175,7 +175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	
 	
-	  function connectionDetector(store) {
+	  function connectionSyncer(store) {
 	    store.dispatch((0, _reducer.connectionStatusChanged)(navigator.onLine));
 	
 	    window.addEventListener('online', function () {
@@ -187,8 +187,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  var syncConnectionWithStore = function syncConnectionWithStore(store) {
-	    var detectorFn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : connectionDetector;
-	    return detectorFn(store);
+	    var syncerFunction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : connectionSyncer;
+	    return syncerFunction(store);
 	  };
 	
 	  exports.default = syncConnectionWithStore;
