@@ -1,15 +1,13 @@
-export const STATUS_CHANGED = 'Connection.STATUS_CHANGED'
+import createAction from 'redux-actions/lib/createAction'
 
-export function connectionStatusChanged (isOnline) {
-  return { type: STATUS_CHANGED, payload: isOnline }
-}
+export const connectionStatusChanged = createAction('Connection.STATUS_CHANGED')
 
 const initialState = {
   isOnline: false
 }
 
 export default function connectionReducer (state = initialState, action) {
-  if (action.type === STATUS_CHANGED) {
+  if (action.type === connectionStatusChanged.toString()) {
     return {...state, isOnline: action.payload}
   }
 

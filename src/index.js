@@ -1,6 +1,6 @@
-import connectionReducer, { connectionStatusChanged, STATUS_CHANGED } from './reducer'
+import connectionReducer, { connectionStatusChanged } from './reducer'
 import syncConnectionWithStore from './syncer'
 
-export { syncConnectionWithStore, connectionStatusChanged, STATUS_CHANGED }
+export { syncConnectionWithStore, connectionStatusChanged }
 
 export default connectionReducer

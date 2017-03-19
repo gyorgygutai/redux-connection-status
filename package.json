@@ -59,5 +59,8 @@
   "babelBoilerplateOptions": {
     "entryFileName": "index.js",
     "mainVarName": "index"
+  },
+  "dependencies": {
+    "redux-actions": "^2.0.1"
   }
 }
