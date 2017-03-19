@@ -1,10 +1,12 @@
-import { connectionStatusChanged } from './reducer'
+import { setInitialConnectionStatus, connectionStatusChanged } from './actions'
 
 function connectionSyncer (store) {
-  store.dispatch(connectionStatusChanged(navigator.onLine))
+  const { dispatch } = store
 
-  window.addEventListener('online', () => store.dispatch(connectionStatusChanged(true)))
-  window.addEventListener('offline', () => store.dispatch(connectionStatusChanged(false)))
+  dispatch(setInitialConnectionStatus(navigator.onLine))
+
+  window.addEventListener('online', () => dispatch(connectionStatusChanged(true)))
+  window.addEventListener('offline', () => dispatch(connectionStatusChanged(false)))
 }
 
 const syncConnectionWithStore = (store, syncerFunction = connectionSyncer) => syncerFunction(store)
