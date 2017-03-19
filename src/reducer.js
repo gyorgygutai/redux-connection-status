@@ -1,6 +1,6 @@
 import { setInitialConnectionStatus, connectionStatusChanged } from './actions'
 
-const initialState = {
+export const initialState = {
   isOnline: false
 }
 
