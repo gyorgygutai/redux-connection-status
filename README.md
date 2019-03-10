@@ -42,9 +42,24 @@ This function has a second optional parameter. The default implementation uses t
 If you detect a change, just call the corresponding action:
 
 ```js
-import { connectionStatusChanged } from 'redux-connection-status'
+import { actions } from 'redux-connection-status'
 
 const isOnline = false
 
-store.dispatch(connectionStatusChanged(isOnline))
+store.dispatch(actions.connectionStatusChanged(isOnline))
+```
+
+## Redux Saga example
+
+```js
+import { takeEvery } from 'redux-saga/effects'
+import { actions } from 'redux-connection-status'
+
+function* mySaga () {
+	yield takeEvery(actions.connectionStatusChanged.toString(), function* ({ payload })) {
+		return payload
+			? console.log('Connected')
+			: console.log('Disconnected')
+	}
+}
 ```

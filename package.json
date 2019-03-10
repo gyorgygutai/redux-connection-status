@@ -4,7 +4,7 @@
   "description": "Access network connection status from your store.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "gulp",
+    "test": "mocha --require babel-core/register ./test/unit",
     "lint": "gulp lint",
     "test-browser": "gulp test-browser",
     "watch": "gulp watch",
@@ -51,6 +51,7 @@
     "isparta": "4.0.0",
     "json-loader": "0.5.4",
     "mocha": "3.0.2",
+    "redux": "^3.6.0",
     "sinon": "1.17.5",
     "sinon-chai": "2.8.0",
     "webpack": "1.13.2",
@@ -59,5 +60,8 @@
   "babelBoilerplateOptions": {
     "entryFileName": "index.js",
     "mainVarName": "index"
+  },
+  "dependencies": {
+    "redux-actions": "^2.0.1"
   }
 }

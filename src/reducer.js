@@ -1,17 +1,16 @@
-export const STATUS_CHANGED = 'Connection.STATUS_CHANGED'
+import { setInitialConnectionStatus, connectionStatusChanged } from './actions'
 
-export function connectionStatusChanged (isOnline) {
-  return { type: STATUS_CHANGED, payload: isOnline }
-}
-
-const initialState = {
+export const initialState = {
   isOnline: false
 }
 
 export default function connectionReducer (state = initialState, action) {
-  if (action.type === STATUS_CHANGED) {
-    return {...state, isOnline: action.payload}
-  }
+  switch (action.type) {
+    case setInitialConnectionStatus.toString():
+    case connectionStatusChanged.toString():
+      return {...state, isOnline: action.payload}
 
-  return state
+    default:
+      return state
+  }
 }
